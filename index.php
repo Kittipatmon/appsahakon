@@ -69,6 +69,7 @@ $news = [
 <html lang="th">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>สหกรณ์ออมทรัพย์ครูไทย — UI Design</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -89,7 +90,7 @@ $news = [
   }
   *{box-sizing:border-box;margin:0;padding:0;}
   body{
-    background:#0e1420;
+    background:#f3f4f6;
     font-family:'Noto Sans Thai',sans-serif;
     display:flex;align-items:flex-start;justify-content:center;
     padding:40px 16px;min-height:100vh;
@@ -200,6 +201,41 @@ $news = [
   .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 
   ::-webkit-scrollbar{width:0;}
+
+  /* Responsive layout for Mobile & iPad */
+  @media (max-width: 1024px) {
+    body {
+      padding: 0;
+      background: #fff;
+    }
+    .caption {
+      display: none;
+    }
+    .phone {
+      width: 100vw;
+      height: 100vh;
+      border: none;
+      border-radius: 0;
+      box-shadow: none;
+    }
+    .notch {
+      display: none;
+    }
+    .status {
+      display: none;
+    }
+    .scroll {
+      padding-top: 20px;
+      padding-bottom: 80px;
+    }
+    .navbar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 60;
+    }
+  }
 </style>
 </head>
 <body>

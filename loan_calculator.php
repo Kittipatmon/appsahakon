@@ -2,6 +2,7 @@
 <html lang="th">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>คำนวณเงินกู้</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -19,7 +20,7 @@
   }
   *{box-sizing:border-box;margin:0;padding:0;}
   body{
-    background:#0e1420; font-family:'Noto Sans Thai',sans-serif;
+    background:#f3f4f6; font-family:'Noto Sans Thai',sans-serif;
     display:flex;align-items:flex-start;justify-content:center;
     padding:40px 16px;min-height:100vh;
   }
@@ -77,11 +78,56 @@
   .navitem span{font-size:10.5px;font-weight:600;}
 
   ::-webkit-scrollbar{width:0;}
+
+  /* Responsive layout for Mobile & iPad */
+  @media (max-width: 1024px) {
+    body {
+      padding: 0;
+      background: #fff;
+    }
+    .caption {
+      display: none;
+    }
+    .phone {
+      width: 100vw;
+      height: 100vh;
+      border: none;
+      border-radius: 0;
+      box-shadow: none;
+    }
+    .notch {
+      display: none;
+    }
+    .status {
+      display: none;
+    }
+    .topbar {
+      padding-top: 34px;
+    }
+    .scroll {
+      padding-bottom: 80px;
+    }
+    .navbar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 60;
+    }
+    .form-label {
+      flex: 0 0 85px;
+      font-size: 13px;
+    }
+    .flex-row {
+      flex-direction: column;
+    }
+  }
 </style>
 </head>
 <body>
 <div class="stage">
   <div class="caption">สหกรณ์ออมทรัพย์ครูไทย — คำนวณเงินกู้</div>
+
   <div class="phone">
     <div class="notch"></div>
     <div class="scroll">
