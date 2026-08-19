@@ -15,8 +15,8 @@ $menuCategories = [
         ['label' => 'หุ้น<br>รายเดือน',    'image' => 'หุ้นรายเดือน-removebg-preview.png'],
     ],
     'ข้อมูลสมาชิก' => [
-        ['label' => 'ข้อมูล<br>ส่วนตัว',   'image' => 'ข้อมูลส่วนตัว-removebg-preview.png'],
-        ['label' => 'แจ้งเตือน',          'image' => '13-removebg-preview.png'],
+        ['label' => 'ข้อมูล<br>ส่วนตัว',   'image' => 'ข้อมูลส่วนตัว-removebg-preview.png', 'url' => 'profile.php'],
+        ['label' => 'แจ้งเตือน',          'image' => '13-removebg-preview.png', 'url' => 'notifications.php'],
         ['label' => 'กรรมการ',            'image' => 'กรรมการ-removebg-preview.png'],
         ['label' => 'ฝ่าย<br>จัดการ',      'image' => 'ฝ่ายจัดการ-removebg-preview.png'],
     ]
@@ -46,22 +46,24 @@ $menuCategories = [
     --text-muted:#8A8A8A;
   }
   *{box-sizing:border-box;margin:0;padding:0;}
-  body{
-    background:#f3f4f6;
-    font-family:'Noto Sans Thai',sans-serif;
-    display:flex;align-items:flex-start;justify-content:center;
-    padding:40px 16px;min-height:100vh;
+  body, html {
+    margin: 0; padding: 0;
+    font-family: 'Noto Sans Thai', sans-serif;
+    background-color: var(--bg, #f3f4f6);
+    min-height: 100vh;
   }
-  .stage{display:flex;flex-direction:column;align-items:center;gap:18px;}
-  
-  .phone{
-    width:390px;height:844px;
-    background:#fff;
-    border-radius:44px;border:10px solid #0b0f16;
-    box-shadow:0 30px 60px -20px rgba(0,0,0,.6), 0 0 0 1px rgba(255,255,255,.04);
-    overflow:hidden;position:relative;display:flex;flex-direction:column;
+  .app-container {
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+    background: #fff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0,0,0,0.05);
   }
-  .notch{position:absolute;top:0;left:50%;transform:translateX(-50%);width:120px;height:26px;background:#0b0f16;border-radius:0 0 16px 16px;z-index:50;}
 
   .status{display:flex;justify-content:space-between;align-items:center;padding:16px 26px 4px;font-size:13px;font-weight:600;color:#000;}
 
@@ -73,13 +75,14 @@ $menuCategories = [
   .scroll{flex:1;overflow-y:auto;padding-bottom:100px;}
   .scroll::-webkit-scrollbar{width:0;}
 
-  .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px 6px;padding:16px 18px 10px;}
+  .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px 0;padding:16px 12px 10px;}
   .category-title{font-size:14px;font-weight:700;color:var(--navy-deep);padding:24px 18px 0;margin-bottom:-6px;}
   .tile{display:flex;flex-direction:column;align-items:center;gap:0;text-align:center;cursor:pointer;-webkit-tap-highlight-color:transparent;}
-  .tile-icon{width:68px;height:68px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:transform .15s ease;}
+  .tile-icon{width:85px;height:85px;max-width:100%;aspect-ratio:1;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:transform .15s ease;}
+  .tile-icon img{width:100%;height:100%;object-fit:contain;display:block;}
   .tile:hover .tile-icon{transform:translateY(-3px);box-shadow:0 10px 18px -6px rgba(0,0,0,.28);}
   .tile:active .tile-icon{transform:translateY(0) scale(.92);}
-  .tile-label{font-size:11px;color:var(--text);line-height:1.3;font-weight:500;margin-top:-4px;}
+  .tile-label{font-size:11px;color:var(--text);line-height:1.1;font-weight:500;margin-top:-4px;}
 
   .bg-orange{background:linear-gradient(160deg,#FFB37A,var(--orange-deep));color:#fff;}
   .bg-blue{background:linear-gradient(160deg,#7FA6FF,var(--blue));color:#fff;}
@@ -103,48 +106,20 @@ $menuCategories = [
   }
   .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 
-  /* Responsive layout for Mobile & iPad */
-  @media (max-width: 1024px) {
-    body {
-      padding: 0;
-      background: #fff;
-    }
-    .caption {
-      display: none;
-    }
-    .phone {
-      width: 100vw;
-      height: 100vh;
-      border: none;
-      border-radius: 0;
+  @media (max-width: 480px) {
+    .app-container {
       box-shadow: none;
     }
-    .notch {
-      display: none;
-    }
-    .status {
-      display: none;
-    }
-    .topbar {
-      padding-top: 32px;
-    }
-    .scroll {
-      padding-bottom: 80px;
-    }
     .navbar {
-      position: fixed;
+      position: sticky;
       bottom: 0;
-      left: 0;
-      right: 0;
       z-index: 60;
     }
   }
 </style>
 </head>
 <body>
-<div class="stage">
-  <div class="phone">
-    <div class="notch"></div>
+<div class="app-container">
     <div class="scroll">
       <div class="status">
         <span>9:41</span>
@@ -181,7 +156,6 @@ $menuCategories = [
     <?php include 'nav_footer.php'; ?>
 
     <div class="toast" id="toast"></div>
-  </div>
 </div>
 
 <script>

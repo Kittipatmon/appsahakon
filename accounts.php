@@ -41,54 +41,174 @@ $accounts = [
     --text-muted:#8A8A8A;
   }
   *{box-sizing:border-box;margin:0;padding:0;}
-  body{
-    background:#f3f4f6;
-    font-family:'Noto Sans Thai',sans-serif;
-    display:flex;align-items:flex-start;justify-content:center;
-    padding:40px 16px;min-height:100vh;
+  body, html {
+    margin: 0; padding: 0;
+    font-family: 'Noto Sans Thai', sans-serif;
+    background-color: var(--bg, #f3f4f6);
+    min-height: 100vh;
   }
-  .stage{display:flex;flex-direction:column;align-items:center;gap:18px;}
-  .caption{color:#8a93a6;font-size:12px;letter-spacing:.08em;text-transform:uppercase;}
-
-  .phone{
-    width:390px;height:844px;
-    background:#fff;
-    border-radius:44px;border:10px solid #0b0f16;
-    box-shadow:0 30px 60px -20px rgba(0,0,0,.6), 0 0 0 1px rgba(255,255,255,.04);
-    overflow:hidden;position:relative;display:flex;flex-direction:column;
+  .app-container {
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+    background: var(--bg, #f3f4f6);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0,0,0,0.05);
   }
-  .notch{position:absolute;top:0;left:50%;transform:translateX(-50%);width:120px;height:26px;background:#0b0f16;border-radius:0 0 16px 16px;z-index:50;}
+  @media (min-width: 481px) {
+    .app-container {
+      margin: 20px auto;
+      min-height: calc(100vh - 40px);
+      border-radius: 24px;
+      border: 1px solid #E5E7EB;
+    }
+  }
 
-  .scroll{flex:1;overflow-y:auto;background:#F6F8FA;}
+  .scroll{flex:1;overflow-y:auto;background:transparent;padding-bottom:100px;}
+  .header-sticky {
+    background: #ffffff;
+  }
   .status{display:flex;justify-content:space-between;align-items:center;padding:16px 26px 4px;font-size:13px;font-weight:600;color:var(--text);}
   
-  .topbar { display:flex; align-items:center; padding: 10px 20px 24px; background: #F6F8FA; position: sticky; top:0; z-index: 10; }
-  .page-title { font-size: 18px; font-weight: 700; color: var(--navy-deep); margin-left: auto; margin-right: auto; }
+  .topbar { display:flex; align-items:center; justify-content:space-between; padding: 6px 20px 12px; background: transparent; }
+  .topbar-center { text-align:center; flex:1; }
+  .page-title { font-size: 18px; font-weight: 700; color: var(--navy-deep); }
+  .page-subtitle { font-size: 11px; color: var(--text-muted); margin-top: 4px; font-weight: 500; }
+  .placeholder, .topbar-right, .back-btn { width: 40px; display:flex; align-items:center; justify-content:center; }
+  .back-btn {
+    color: var(--navy-deep);
+    cursor: pointer;
+    transition: background 0.15s, transform 0.15s ease;
+    border-radius: 50%;
+    height: 40px;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .back-btn:hover { background: rgba(0,0,0,0.04); }
+  .back-btn:active { transform: scale(0.92); }
   
-  .section { margin: 0 16px 26px; background: #fff; border-radius: 22px; box-shadow: 0 8px 24px -8px rgba(0,0,0,0.04); overflow: hidden; }
-  .sec-title { padding: 18px 20px 14px; font-size: 15.5px; font-weight: 800; color: var(--navy-deep); border-bottom: 1px solid #F0F2F5; }
-  
-  .card { padding: 18px 20px; border-bottom: 1px solid #F0F2F5; cursor:pointer; transition:background 0.15s ease; }
-  .card:active { background: #F9FAFB; }
-  .card:last-child { border-bottom: none; }
-  
-  .card-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
-  .acc-type-wrap { display: flex; align-items: center; gap: 8px; }
-  .badge-transfer { font-size: 10px; font-weight: 700; color: #2FAE7B; background: rgba(47,174,123,0.12); padding: 3px 8px; border-radius: 12px; }
-  .acc-type { font-size: 14.5px; font-weight: 700; color: var(--text); }
-  .acc-no { font-size: 11.5px; color: var(--text-muted); }
-  .acc-bal { font-size: 20px; font-weight: 800; color: var(--navy-deep); text-align: right; margin-top: 4px; }
-  .acc-bal span { font-size: 12.5px; color: var(--text-muted); font-weight: 500; margin-left: 4px; }
-  
-  .section.share { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-deep) 100%); color: #fff; border: none; }
-  .section.share .sec-title { color: #fff; border-bottom: 1px solid rgba(255,255,255,0.1); }
-  .section.share .acc-type { color: #fff; }
-  .section.share .acc-no { color: rgba(255,255,255,0.7); }
-  .section.share .acc-bal { color: var(--orange-light); font-size: 24px; }
-  .section.share .acc-bal span { color: rgba(255,255,255,0.7); }
-  .section.share .card:active { background: rgba(255,255,255,0.05); }
+  .acc-card {
+    position: relative;
+    background: #ffffff;
+    border-radius: 18px;
+    padding: 16px 20px;
+    margin: 16px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12), 0 0 1px rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  }
+  .acc-card:active {
+    transform: scale(0.98);
+    background: #f9fafb;
+  }
 
-  .navbar{display:flex;justify-content:space-around;align-items:center;padding:10px 6px 22px;background:#fff;border-top:1px solid #F0F0F0;flex-shrink:0;}
+  
+  .card-header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .acc-label {
+    font-size: 11px;
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+  .acc-val {
+    font-size: 15.5px;
+    font-weight: 700;
+    color: var(--text);
+    margin-top: 4px;
+  }
+  
+  .card-body {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-top: 4px;
+  }
+  .bal-label {
+    font-size: 11px;
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+  .bal-val {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--navy-deep);
+    margin-top: 4px;
+  }
+  .bal-val span {
+    font-size: 12px;
+    color: var(--text);
+    font-weight: 600;
+    margin-left: 4px;
+  }
+  
+  .card-footer {
+    display: flex;
+    justify-content: flex-end;
+    border-top: 1px solid #F3F4F6;
+    padding-top: 10px;
+    margin-top: 4px;
+  }
+  .acc-link {
+    font-size: 13.5px;
+    font-weight: 700;
+    color: var(--blue);
+    cursor: pointer;
+    transition: opacity 0.15s;
+  }
+  .acc-link:hover {
+    opacity: 0.8;
+  }
+  
+  .btn-add-acc {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px dashed var(--orange-deep);
+    border-radius: 18px;
+    padding: 16px;
+    margin: 24px 16px;
+    color: var(--orange-deep);
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .btn-add-acc:hover {
+    background: rgba(245, 101, 43, 0.05);
+  }
+  @media (max-width: 480px) {
+    .app-container {
+      box-shadow: none;
+    }
+    .navbar {
+      position: sticky;
+      bottom: 0;
+      z-index: 60;
+    }
+  } 
+  .plus-circle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: rgba(245, 101, 43, 0.1);
+    color: var(--orange-deep);
+    margin-right: 8px;
+  }
+
+  .navbar{display:flex;justify-content:space-around;align-items:center;padding:14px 6px;background:#fff;border-top:1px solid #F0F0F0;position:absolute;bottom:0;left:0;right:0;z-index:50;}
   .navitem{display:flex;flex-direction:column;align-items:center;gap:4px;color:#B7B7B7;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:transform .15s ease;}
   .navitem:active{transform:scale(.9);}
   .navitem.active{color:var(--orange-deep);}
@@ -135,58 +255,83 @@ $accounts = [
 </style>
 </head>
 <body>
-<div class="stage">
-  <div class="caption">สหกรณ์ออมทรัพย์ครูไทย — หน้าบัญชีของฉัน</div>
-
-  <div class="phone">
-    <div class="notch"></div>
+<div class="app-container">
     <div class="scroll">
-      <div class="status">
-        <span>9:41</span>
-        <span>●●●● 5G ▮▮▮</span>
-      </div>
+      <div class="header-sticky">
+        <div class="status">
+          <span id="status-time">9:41</span>
+          <span>●●●● 5G ▮▮▮</span>
+        </div>
 
-      <div class="topbar">
-        <div class="page-title">บัญชีของฉัน</div>
-      </div>
-
-      <div class="section share">
-        <div class="sec-title">ทุนเรือนหุ้น</div>
-        <div class="card">
-          <div class="card-top">
-            <div class="acc-type">ทุนเรือนหุ้นสะสม</div>
-            <div class="acc-no">ส่งรายเดือน: ฿ <?= $accounts['shares']['monthly'] ?></div>
+        <div class="topbar">
+          <div class="back-btn" onclick="window.location.href='index.php'">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
           </div>
-          <div class="acc-bal"><?= $accounts['shares']['amount'] ?><span>บาท</span></div>
+          <div class="topbar-center">
+            <div class="page-title">บัญชีของฉัน</div>
+            <div class="page-subtitle" id="update-time">ข้อมูลล่าสุดเมื่อ 5 ต.ค. 2569, 15:45</div>
+          </div>
+          <div class="topbar-right">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--navy-deep)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/><circle cx="5" cy="12" r="1.5"/></svg>
+          </div>
         </div>
       </div>
 
-      <div class="section">
-        <div class="sec-title">เงินฝาก</div>
-        <?php foreach($accounts['deposits'] as $dep): ?>
-        <div class="card">
-          <div class="card-top">
-            <div class="acc-type-wrap">
-              <div class="acc-type"><?= $dep['type'] ?></div>
-            </div>
-            <div class="acc-no badge-transfer">เลขที่ <?= $dep['acc_no'] ?></div>
-          </div>
-          <div class="acc-bal"><?= $dep['balance'] ?><span>บาท</span></div>
+      <!-- ทุนเรือนหุ้น (Share Card) -->
+      <div class="acc-card share" onclick="window.location.href='detail_accounts.php?type=share'">
+        <div class="card-header">
+          <span class="acc-label">ทุนเรือนหุ้นสะสม</span>
+          <span class="acc-val">ส่งรายเดือน: ฿ <?= htmlspecialchars($accounts['shares']['monthly']) ?></span>
         </div>
-        <?php endforeach; ?>
+        <div class="card-body">
+          <span class="bal-label">ยอดเงินสะสม</span>
+          <span class="bal-val"><?= htmlspecialchars($accounts['shares']['amount']) ?> <span>บาท</span></span>
+        </div>
+        <div class="card-footer">
+          <span class="acc-link">ดูรายละเอียด</span>
+        </div>
       </div>
 
-      <div class="section">
-        <div class="sec-title">เงินกู้</div>
-        <?php foreach($accounts['loans'] as $loan): ?>
-        <div class="card">
-          <div class="card-top">
-            <div class="acc-type"><?= $loan['type'] ?></div>
-            <div class="acc-no">เลขที่ <?= $loan['acc_no'] ?></div>
-          </div>
-          <div class="acc-bal"><?= $loan['balance'] ?><span>บาท</span></div>
+      <!-- บัญชีเงินฝาก (Deposit Cards) -->
+      <?php foreach($accounts['deposits'] as $dep): ?>
+      <div class="acc-card deposit" onclick="window.location.href='detail_accounts.php?type=deposit&acc_no=<?= urlencode($dep['acc_no']) ?>'">
+        <div class="card-header">
+          <span class="acc-label">บัญชีฝากเงินออมทรัพย์ (<?= htmlspecialchars($dep['type']) ?>)</span>
+          <span class="acc-val"><?= htmlspecialchars($dep['acc_no']) ?></span>
         </div>
-        <?php endforeach; ?>
+        <div class="card-body">
+          <span class="bal-label">ยอดเงินที่ใช้ได้</span>
+          <span class="bal-val"><?= htmlspecialchars($dep['balance']) ?> <span>บาท</span></span>
+        </div>
+        <div class="card-footer">
+          <span class="acc-link" onclick="event.stopPropagation(); go('โอนเงิน บัญชี <?= htmlspecialchars($dep['acc_no']) ?>')">โอนเงิน</span>
+        </div>
+      </div>
+      <?php endforeach; ?>
+
+      <!-- บัญชีเงินกู้ (Loan Cards) -->
+      <?php foreach($accounts['loans'] as $loan): ?>
+      <div class="acc-card loan" onclick="window.location.href='detail_accounts.php?type=loan&acc_no=<?= urlencode($loan['acc_no']) ?>'">
+        <div class="card-header">
+          <span class="acc-label">เงินกู้สามัญ (<?= htmlspecialchars($loan['type']) ?>)</span>
+          <span class="acc-val"><?= htmlspecialchars($loan['acc_no']) ?></span>
+        </div>
+        <div class="card-body">
+          <span class="bal-label">ยอดหนี้คงค้าง</span>
+          <span class="bal-val"><?= htmlspecialchars($loan['balance']) ?> <span>บาท</span></span>
+        </div>
+        <div class="card-footer">
+          <span class="acc-link" onclick="event.stopPropagation(); go('ชำระเงินกู้ <?= htmlspecialchars($loan['acc_no']) ?>')">ชำระเงินกู้</span>
+        </div>
+      </div>
+      <?php endforeach; ?>
+
+      <!-- ปุ่มเพิ่มบัญชี -->
+      <div class="btn-add-acc" onclick="go('เพิ่มบัญชี')">
+        <span class="plus-circle">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </span>
+        เพิ่มบัญชี
       </div>
 
     </div>
@@ -200,6 +345,36 @@ $accounts = [
       // url redirect is handled by inline onclick in nav_footer.php
     }
   }
+
+  // Real-time Clock and Last Updated Date/Time
+  function updateClock() {
+    const now = new Date();
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const statusTimeEl = document.getElementById('status-time');
+    if (statusTimeEl) {
+      statusTimeEl.textContent = `${hours}:${minutes}`;
+    }
+  }
+
+  function setLastUpdatedTime() {
+    const now = new Date();
+    const thaiMonths = ["ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค."];
+    const day = now.getDate();
+    const month = thaiMonths[now.getMonth()];
+    const year = now.getFullYear() + 543; // Buddhist Era
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    
+    const subtitleEl = document.getElementById('update-time');
+    if (subtitleEl) {
+      subtitleEl.textContent = `ข้อมูลล่าสุดเมื่อ ${day} ${month} ${year}, ${hours}:${minutes}`;
+    }
+  }
+
+  updateClock();
+  setLastUpdatedTime();
+  setInterval(updateClock, 10000); // Update clock every 10 seconds
 </script>
 </body>
 </html>

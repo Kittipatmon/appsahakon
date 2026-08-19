@@ -86,35 +86,28 @@ $news = [
     --red:#EB5757;
     --green:#2FAE7B;
     --text:#2B2B2B;
-  body, html {
-    margin: 0; padding: 0;
-    font-family: 'Noto Sans Thai', sans-serif;
-    background-color: var(--bg, #f3f4f6);
-    min-height: 100vh;
+    --text-muted:#8A8A8A;
   }
-  .app-container {
-    width: 100%;
-    max-width: 480px;
-    margin: 0 auto;
-    background: #fff;
-    height: 100vh;
-    height: 100dvh;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    overflow: hidden;
-    box-shadow: 0 0 20px rgba(0,0,0,0.05);
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    background:#f3f4f6;
+    font-family:'Noto Sans Thai',sans-serif;
+    display:flex;align-items:flex-start;justify-content:center;
+    padding:40px 16px;min-height:100vh;
   }
-  @media (min-width: 481px) {
-    .app-container {
-      margin: 20px auto;
-      height: calc(100vh - 40px);
-      border-radius: 24px;
-      border: 1px solid #E5E7EB;
-    }
-  }
+  .stage{display:flex;flex-direction:column;align-items:center;gap:18px;}
+  .caption{color:#8a93a6;font-size:12px;letter-spacing:.08em;text-transform:uppercase;}
 
-  .scroll{flex:1;overflow-y:auto;background:linear-gradient(180deg,var(--orange-deep) 0%,var(--orange) 20%,var(--orange-light) 38%,var(--peach) 55%,#ffffff 72%);}
+  .phone{
+    width:390px;height:844px;
+    background:#fff;
+    border-radius:44px;border:10px solid #0b0f16;
+    box-shadow:0 30px 60px -20px rgba(0,0,0,.6), 0 0 0 1px rgba(255,255,255,.04);
+    overflow:hidden;position:relative;display:flex;flex-direction:column;
+  }
+  .notch{position:absolute;top:0;left:50%;transform:translateX(-50%);width:120px;height:26px;background:#0b0f16;border-radius:0 0 16px 16px;z-index:50;}
+
+  .scroll{flex:1;overflow-y:auto;background:linear-gradient(180deg,var(--orange-deep) 0%,var(--orange) 20%,var(--orange-light) 38%,var(--peach) 55%,#ffffff 72%);display:flex;flex-direction:column;}
 
   .status{display:flex;justify-content:space-between;align-items:center;padding:16px 26px 4px;font-size:13px;font-weight:600;color:#fff;}
 
@@ -125,40 +118,33 @@ $news = [
   .member-name{font-size:14.5px;font-weight:700;color:#fff;}
   .member-id{font-size:11px;color:rgba(255,255,255,.85);margin-top:1px;}
   .header-icons{display:flex;gap:10px;}
-  .icon-btn{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.22);display:flex;align-items:center;justify-content:center;position:relative;cursor:pointer;transition:transform .15s ease, background .15s ease;}
+  .icon-btn{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.22);display:flex;align-items:center;justify-content:center;position:relative;cursor:pointer;transition:transform .15s ease, background .15s ease;}
   .icon-btn:hover{background:rgba(255,255,255,.34);}
   .icon-btn:active{transform:scale(.92);}
   .dot{position:absolute;top:5px;right:5px;width:6px;height:6px;border-radius:50%;background:#fff;border:1.5px solid var(--orange);}
   .avatar{cursor:pointer;transition:transform .15s ease;}
   .avatar:active{transform:scale(.92);}
 
-  .promo{cursor:pointer;transition:transform .15s ease, box-shadow .15s ease;margin:14px 18px 0;width:calc(100% - 36px);background:linear-gradient(120deg,var(--navy) 0%,var(--navy-deep) 100%);border-radius:16px;padding:14px 14px;display:flex;align-items:center;gap:12px;box-shadow:0 10px 22px -10px rgba(19,42,68,.6);}
-  .promo:hover{transform:translateY(-2px);box-shadow:0 14px 26px -10px rgba(19,42,68,.7);}
+  .promo:hover{transform:translateY(-2px);box-shadow:0 12px 28px -10px rgba(0,0,0,.22);}
   .promo:active{transform:translateY(0) scale(.98);}
-  .promo-icon{width:46px;height:46px;border-radius:50%;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#FFC98B;}
-  .promo-text{color:#fff;}
-  .promo-text .t1{font-size:12.5px;font-weight:700;}
-  .promo-text .t2{font-size:10.5px;color:#C9D6E8;margin-top:2px;line-height:1.4;}
-  .promo-rate{margin-left:auto;text-align:right;color:#FFC98B;font-weight:800;font-size:15px;flex-shrink:0;}
-  .promo-rate span{display:block;font-size:9px;color:#C9D6E8;font-weight:500;}
 
-  .quick{margin:14px 18px 0;width:calc(100% - 36px);background:#fff;border-radius:16px;display:flex;box-shadow:0 10px 24px -14px rgba(0,0,0,.25);overflow:hidden;}
-  .quick a{flex:1;display:flex;align-items:center;gap:9px;padding:13px 12px;text-decoration:none;position:relative;cursor:pointer;transition:background .15s ease;}
+  .quick{margin:14px 18px 0;background:#fff;border-radius:20px;display:flex;box-shadow:0 10px 24px -14px rgba(0,0,0,.25);overflow:hidden;}
+  .quick a{flex:1;display:flex;align-items:center;gap:9px;padding:12px 14px;text-decoration:none;position:relative;cursor:pointer;transition:background .15s ease;}
   .quick a:hover{background:#FAFAFA;}
   .quick a:active{background:#F2F2F2;}
-  .quick a:first-child::after{content:"";position:absolute;right:0;top:14%;bottom:14%;width:1px;background:#EEE;}
-  .qicon{width:36px;height:36px;border-radius:50%;background:var(--blue);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-  .qlabel{font-size:12px;font-weight:600;color:var(--text);line-height:1.3;}
+  .quick a:first-child::after{content:"";position:absolute;right:0;top:20%;bottom:20%;width:1px;background:#E2E8F0;}
+  .qicon{width:44px;height:44px;border-radius:50%;background:var(--blue);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .qlabel{font-size:12px;font-weight:600;color:var(--text);line-height:1.1;}
   .qchev{margin-left:auto;color:#C7C7C7;transition:transform .15s ease;}
   .quick a:hover .qchev{transform:translateX(2px);}
 
-  .panel{background:#fff;border-radius:22px 22px 0 0;margin-top:16px;padding:20px 18px 4px;}
-  .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px 6px;}
+  .panel{background:#fff;border-radius:22px 22px 0 0;margin-top:16px;padding:20px 10px 4px;flex:1;display:flex;flex-direction:column;}
+  .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px 2px;}
   .tile{display:flex;flex-direction:column;align-items:center;gap:0;text-align:center;cursor:pointer;-webkit-tap-highlight-color:transparent;}
-  .tile-icon{width:80px;height:80px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:transform .15s ease;}
+  .tile-icon{width:82px;height:82px;max-width:100%;aspect-ratio:1;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:transform .15s ease;}
   .tile:hover .tile-icon{transform:translateY(-3px);box-shadow:0 10px 18px -6px rgba(0,0,0,.28);}
   .tile:active .tile-icon{transform:translateY(0) scale(.92);}
-  .tile-label{font-size:11px;color:var(--text);line-height:1.3;font-weight:500;margin-top:-4px;}
+  .tile-label{font-size:11px;color:var(--text);line-height:1.1;font-weight:500;margin-top:-4px;}
 
   .menu-head{display:flex;align-items:center;justify-content:space-between;margin:0 4px 16px;}
   .menu-title{font-size:15px;font-weight:800;color:var(--navy-deep);}
@@ -176,14 +162,77 @@ $news = [
   .news-all{font-size:11.5px;color:var(--orange-deep);font-weight:600;cursor:pointer;}
   .news-all:hover{text-decoration:underline;}
   .promo-wrapper { position: relative; margin: 20px 20px 0; display: grid; }
-  .promo { grid-area: 1 / 1; display: flex; align-items: center; background: var(--navy-deep); border-radius: 18px; padding: 16px 18px; box-shadow: 0 12px 24px -10px rgba(19,42,68,.6); cursor: pointer; box-sizing: border-box; opacity: 0; transition: opacity 0.8s ease; pointer-events: none; z-index: 1; }
+  .promo {
+    grid-area: 1 / 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #ffffff;
+    border-radius: 18px;
+    padding: 12px 16px;
+    box-shadow: 0 10px 24px -10px rgba(0,0,0,0.12), 0 0 1px rgba(0,0,0,0.1);
+    cursor: pointer;
+    box-sizing: border-box;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+    pointer-events: none;
+    z-index: 1;
+    min-height: 115px;
+  }
   .promo.active { opacity: 1; pointer-events: auto; z-index: 2; }
-  .promo-icon{width:46px;height:46px;border-radius:50%;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#FFC98B;}
-  .promo-text{color:#fff;margin-left:12px;}
-  .promo-text .t1{font-size:12.5px;font-weight:700;}
-  .promo-text .t2{font-size:10.5px;color:#C9D6E8;margin-top:2px;line-height:1.4;}
-  .promo-rate{margin-left:auto;text-align:right;color:#FFC98B;font-weight:800;font-size:15px;flex-shrink:0;}
-  .promo-rate span{display:block;font-size:9px;color:#C9D6E8;font-weight:500;}
+  .promo-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    max-width: 65%;
+    z-index: 3;
+  }
+  .promo-content .t1 {
+    font-size: 13.5px;
+    font-weight: 800;
+    color: var(--navy-deep);
+    line-height: 1.3;
+  }
+  .promo-content .t2 {
+    font-size: 10.5px;
+    color: var(--text-muted);
+    line-height: 1.4;
+  }
+  .promo-btn {
+    display: inline-block;
+    background: var(--blue);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 5px 14px;
+    border-radius: 20px;
+    margin-top: 6px;
+    box-shadow: 0 4px 10px rgba(62,123,250,0.3);
+  }
+  .promo-rate-badge {
+    text-align: center;
+    background: rgba(250,138,70,0.12);
+    border: 1px dashed var(--orange);
+    color: var(--orange-deep);
+    padding: 8px 10px;
+    border-radius: 12px;
+    z-index: 3;
+    flex-shrink: 0;
+    align-self: center;
+    margin-left: auto;
+  }
+  .promo-rate-badge .rate-val {
+    font-size: 15px;
+    font-weight: 800;
+    line-height: 1;
+  }
+  .promo-rate-badge .rate-sub {
+    font-size: 9px;
+    font-weight: 600;
+    margin-top: 2px;
+    color: var(--orange);
+  }
   .news-card{display:flex;gap:10px;align-items:center;background:#FFF6EE;border-radius:14px;padding:10px;margin-bottom:24px;cursor:pointer;transition:background .15s ease;}
   .news-card:hover{background:#FFEEDF;}
   .news-card:active{background:#FFE4CE;}
@@ -191,27 +240,7 @@ $news = [
   .news-body .n1{font-size:12px;font-weight:700;color:var(--text);}
   .news-body .n2{font-size:10.5px;color:var(--text-muted);margin-top:2px;}
 
-  .ad-section { margin-top: 24px; padding-bottom: 24px; }
-  .ad-grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 12px; }
-  .ad-box-vert { 
-    background: #fff; border-radius: 12px; border: 1px solid #F0F0F0;
-    aspect-ratio: 3/4; display: flex; flex-direction: column; align-items: center; justify-content: center;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.02); text-align: center; cursor: pointer; padding: 8px; transition: transform 0.1s;
-  }
-  .ad-box-vert:active { transform: scale(0.96); }
-  .ad-box-vert .icon { width: 36px; height: 36px; border-radius: 50%; margin-bottom: 8px; display:flex; align-items:center; justify-content:center; color: #fff; }
-  .ad-box-vert .text { font-size: 11px; font-weight: 600; color: var(--navy-deep); line-height: 1.2; }
-  
-  .ad-grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
-  .ad-box-horiz { 
-    background: #fff; border-radius: 12px; border: 1px solid #F0F0F0;
-    height: 60px; display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.02); text-align: center; cursor: pointer; padding: 8px; transition: transform 0.1s;
-  }
-  .ad-box-horiz:active { transform: scale(0.98); }
-  .ad-box-horiz .text { font-size: 12px; font-weight: 700; color: var(--navy-deep); }
-
-  .navbar{display:flex;justify-content:space-around;align-items:center;padding:14px 6px;background:#fff;border-top:1px solid #F0F0F0;flex-shrink:0;}
+  .navbar{display:flex;justify-content:space-around;align-items:center;padding:10px 6px 22px;background:#fff;border-top:1px solid #F0F0F0;flex-shrink:0;}
   .navitem{display:flex;flex-direction:column;align-items:center;gap:4px;color:#B7B7B7;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:transform .15s ease;}
   .navitem:active{transform:scale(.9);}
   .navitem.active{color:var(--orange-deep);}
@@ -229,20 +258,51 @@ $news = [
 
   ::-webkit-scrollbar{width:0;}
 
-  @media (max-width: 480px) {
-    .app-container {
+  /* Responsive layout for Mobile & iPad */
+  @media (max-width: 1024px) {
+    body {
+      padding: 0;
+      background: #fff;
+    }
+    .caption {
+      display: none;
+    }
+    .phone {
+      width: 100vw;
+      height: 100vh;
+      border: none;
+      border-radius: 0;
       box-shadow: none;
     }
+    .notch {
+      display: none;
+    }
+    .status {
+      display: none;
+    }
+    .scroll {
+      padding-top: 20px;
+      padding-bottom: 0;
+    }
+    .panel {
+      padding-bottom: 80px;
+    }
     .navbar {
-      position: sticky;
+      position: fixed;
       bottom: 0;
+      left: 0;
+      right: 0;
       z-index: 60;
     }
   }
 </style>
 </head>
 <body>
-<div class="app-container">
+<div class="stage">
+  <div class="caption">สหกรณ์ออมทรัพย์ครูไทย — หน้าหลัก (PHP template)</div>
+
+  <div class="phone">
+    <div class="notch"></div>
     <div class="scroll">
       <div class="status">
         <span>9:41</span>
@@ -251,20 +311,21 @@ $news = [
 
       <div class="header">
         <div class="header-row">
-          <div class="member" onclick="window.location.href='profile.php'">
+          <div class="member" onclick="go('ข้อมูลส่วนตัว')">
             <div class="avatar"><?= htmlspecialchars($member['initials']) ?></div>
             <div>
-              <div class="member-name">สวัสดีค่ะ, <?= htmlspecialchars($member['name']) ?></div>
-              <div class="member-id">เลขสมาชิก <?= htmlspecialchars($member['member_no']) ?></div>
+              <div style="font-size:11px; font-weight:500; color:rgba(255,255,255,0.85); line-height:1.2;">สวัสดีค่ะ,</div>
+              <div class="member-name" style="font-size:15px; font-weight:700; color:#fff; margin-top:1px; line-height:1.2;"><?= htmlspecialchars($member['name']) ?></div>
+              <div class="member-id" style="font-size:10.5px; color:rgba(255,255,255,0.75); margin-top:2px;">เลขสมาชิก <?= htmlspecialchars($member['member_no']) ?></div>
             </div>
           </div>
           <div class="header-icons">
-            <div class="icon-btn" onclick="window.location.href='notifications.php'">
-              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+            <div class="icon-btn" onclick="go('การแจ้งเตือน')">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
               <?php if ($member['has_notify']): ?><div class="dot"></div><?php endif; ?>
             </div>
             <div class="icon-btn" onclick="window.location.href='settings.php'">
-              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .34 1.87l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.7 1.7 0 0 0-1.87-.34 1.7 1.7 0 0 0-1 1.55V21a2 2 0 1 1-4 0v-.09A1.7 1.7 0 0 0 9 19.4a1.7 1.7 0 0 0-1.87.34l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.7 1.7 0 0 0 4.6 15a1.7 1.7 0 0 0-1.55-1H3a2 2 0 1 1 0-4h.09A1.7 1.7 0 0 0 4.6 9a1.7 1.7 0 0 0-.34-1.87l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.7 1.7 0 0 0 9 4.6a1.7 1.7 0 0 0 1-1.55V3a2 2 0 1 1 4 0v.09a1.7 1.7 0 0 0 1 1.55 1.7 1.7 0 0 0 1.87-.34l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.7 1.7 0 0 0 19.4 9a1.7 1.7 0 0 0 1.55 1H21a2 2 0 1 1 0 4h-.09a1.7 1.7 0 0 0-1.51 1z"/></svg>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .34 1.87l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.7 1.7 0 0 0-1.87-.34 1.7 1.7 0 0 0-1 1.55V21a2 2 0 1 1-4 0v-.09A1.7 1.7 0 0 0 9 19.4a1.7 1.7 0 0 0-1.87.34l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.7 1.7 0 0 0 4.6 15a1.7 1.7 0 0 0-1.55-1H3a2 2 0 1 1 0-4h.09A1.7 1.7 0 0 0 4.6 9a1.7 1.7 0 0 0-.34-1.87l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.7 1.7 0 0 0 9 4.6a1.7 1.7 0 0 0 1-1.55V3a2 2 0 1 1 4 0v.09a1.7 1.7 0 0 0 1 1.55 1.7 1.7 0 0 0 1.87-.34l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.7 1.7 0 0 0 19.4 9a1.7 1.7 0 0 0 1.55 1H21a2 2 0 1 1 0 4h-.09a1.7 1.7 0 0 0-1.51 1z"/></svg>
             </div>
           </div>
         </div>
@@ -272,18 +333,21 @@ $news = [
 
       <div class="promo-wrapper" id="promoWrapper">
         <?php foreach ($promos as $index => $promo): 
-            $bgStyle = !empty($promo['bg_image']) ? "background: linear-gradient(90deg, rgba(19,42,68,0.95) 0%, rgba(19,42,68,0.7) 50%, rgba(19,42,68,0) 100%), url('{$promo['bg_image']}') right center/cover no-repeat;" : "background: var(--navy-deep);";
+            $bgStyle = !empty($promo['bg_image']) ? "background: linear-gradient(90deg, #ffffff 0%, #ffffff 45%, rgba(255,255,255,0) 90%), url('{$promo['bg_image']}') right center/contain no-repeat, #ffffff;" : "background: #ffffff;";
             $activeClass = $index === 0 ? 'active' : '';
         ?>
         <div class="promo <?= $activeClass ?>" onclick="go('<?= htmlspecialchars($promo['title']) ?>')" style="<?= $bgStyle ?>">
-          <div class="promo-icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2"/><path d="M9 2h6"/></svg>
-          </div>
-          <div class="promo-text">
+          <div class="promo-content">
             <div class="t1"><?= htmlspecialchars($promo['title']) ?></div>
             <div class="t2"><?= $promo['subtitle'] /* มี <br> ในเนื้อหา จึงไม่ escape */ ?></div>
+            <span class="promo-btn">ดูเพิ่มเติม</span>
           </div>
-          <div class="promo-rate"><?= htmlspecialchars($promo['rate']) ?><span><?= htmlspecialchars($promo['rate_sub']) ?></span></div>
+          <?php if (!empty($promo['rate']) && $promo['rate'] !== 'Free'): ?>
+          <div class="promo-rate-badge">
+            <div class="rate-val"><?= htmlspecialchars($promo['rate']) ?></div>
+            <div class="rate-sub"><?= htmlspecialchars($promo['rate_sub']) ?></div>
+          </div>
+          <?php endif; ?>
         </div>
         <?php endforeach; ?>
       </div>
@@ -291,7 +355,7 @@ $news = [
       <div class="quick">
         <?php foreach ($quickActions as $qa): $qaText = strip_tags(str_replace('<br>', ' ', $qa['label'])); ?>
         <a onclick="go('<?= htmlspecialchars($qaText) ?>')">
-          <div class="qicon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><?= $qa['icon'] ?></svg></div>
+          <div class="qicon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><?= $qa['icon'] ?></svg></div>
           <div class="qlabel"><?= $qa['label'] ?></div>
           <div class="qchev">&#8250;</div>
         </a>
@@ -325,45 +389,13 @@ $news = [
             <div class="n2"><?= htmlspecialchars($news['subtitle']) ?></div>
           </div>
         </div>
-
-        <div class="ad-section">
-          <div class="menu-head" style="margin-bottom: 12px; margin-top: 8px;">
-            <div class="menu-title">แนะนำสำหรับคุณ</div>
-          </div>
-          <div class="ad-grid-4">
-            <div class="ad-box-vert" onclick="go('ชวนซื้อหุ้น')">
-              <div class="icon" style="background: var(--orange-deep);"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
-              <div class="text">แนะนำ<br>ซื้อหุ้น</div>
-            </div>
-            <div class="ad-box-vert" onclick="go('แนะนำการออม')">
-              <div class="icon" style="background: var(--blue);"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
-              <div class="text">แนะนำ<br>การออม</div>
-            </div>
-            <div class="ad-box-vert" onclick="go('แนะนำเงินกู้')">
-              <div class="icon" style="background: var(--green);"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
-              <div class="text">สินเชื่อ<br>ฉุกเฉิน</div>
-            </div>
-            <div class="ad-box-vert" onclick="go('สิทธิพิเศษ')">
-              <div class="icon" style="background: var(--purple);"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
-              <div class="text">สิทธิ<br>พิเศษ</div>
-            </div>
-          </div>
-          
-          <div class="ad-grid-2">
-            <div class="ad-box-horiz" onclick="go('โปรโมชันพิเศษ')">
-              <div class="text">โปรโมชันพิเศษ</div>
-            </div>
-            <div class="ad-box-horiz" onclick="go('กิจกรรมสหกรณ์')">
-              <div class="text">กิจกรรมสหกรณ์</div>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
 
     <?php include 'nav_footer.php'; ?>
 
     <div class="toast" id="toast"></div>
+  </div>
 </div>
 
 <script>

@@ -56,8 +56,8 @@
   .list-item:active{background:#F3F4F6;}
   .list-divider{height:1px;background:var(--border-color);margin:0 16px;}
   
-  .item-icon{width:36px;height:36px;border-radius:12px;background:var(--icon-bg);display:flex;align-items:center;justify-content:center;margin-right:16px;flex-shrink:0;}
-  .item-icon svg{stroke:var(--icon-color);fill:none;stroke-width:1.8;width:18px;height:18px;stroke-linecap:round;stroke-linejoin:round;}
+  .item-icon{width:44px;height:44px;border-radius:12px;background:var(--icon-bg);display:flex;align-items:center;justify-content:center;margin-right:16px;flex-shrink:0;}
+  .item-icon svg{stroke:var(--icon-color);fill:none;stroke-width:1.8;width:22px;height:22px;stroke-linecap:round;stroke-linejoin:round;}
   
   .item-label{flex:1;font-size:15px;font-weight:500;color:var(--text-main);}
   
@@ -125,7 +125,7 @@
     </div>
     
     <div class="topbar">
-      <div class="back-btn" onclick="history.back()">
+      <div class="back-btn" onclick="window.location.href='index.php'">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1C1C1C" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
       </div>
       <div class="topbar-title">Settings</div>

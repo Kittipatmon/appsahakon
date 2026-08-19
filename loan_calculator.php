@@ -19,28 +19,42 @@
     --bg-addon:#E2E8F0;
   }
   *{box-sizing:border-box;margin:0;padding:0;}
-  body{
-    background:#f3f4f6; font-family:'Noto Sans Thai',sans-serif;
-    display:flex;align-items:flex-start;justify-content:center;
-    padding:40px 16px;min-height:100vh;
+  body, html {
+    margin: 0; padding: 0;
+    font-family: 'Noto Sans Thai', sans-serif;
+    background-color: var(--bg, #f3f4f6);
+    min-height: 100vh;
   }
-  .stage{display:flex;flex-direction:column;align-items:center;gap:18px;}
-  .caption{color:#8a93a6;font-size:12px;letter-spacing:.08em;text-transform:uppercase;}
-
-  .phone{
-    width:390px;height:844px;
-    background:#fff; border-radius:44px;border:10px solid #0b0f16;
-    box-shadow:0 30px 60px -20px rgba(0,0,0,.6), 0 0 0 1px rgba(255,255,255,.04);
-    overflow:hidden;position:relative;display:flex;flex-direction:column;
+  .app-container {
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+    background: #fff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0,0,0,0.05);
   }
-  .notch{position:absolute;top:0;left:50%;transform:translateX(-50%);width:120px;height:26px;background:#0b0f16;border-radius:0 0 16px 16px;z-index:50;}
+  @media (min-width: 481px) {
+    .app-container {
+      margin: 20px auto;
+      min-height: calc(100vh - 40px);
+      border-radius: 24px;
+      border: 1px solid #E5E7EB;
+    }
+  }
 
   .scroll{flex:1;overflow-y:auto;background:#F6F8FA; padding-bottom: 30px;}
   .status{display:flex;justify-content:space-between;align-items:center;padding:16px 26px 4px;font-size:13px;font-weight:600;color:var(--text);}
   
-  .topbar { display:flex; align-items:center; justify-content: space-between; padding: 16px 20px 12px; background: #F6F8FA; position: sticky; top:0; z-index: 10; }
+  .topbar { display:flex; align-items:center; justify-content: space-between; padding: 42px 20px 12px; background: #ffffff; position: sticky; top:0; z-index: 10; box-shadow: 0 4px 12px rgba(0,0,0,0.03); }
   .back-btn { background:none; border:none; color:var(--navy-deep); cursor:pointer; display:flex; align-items:center; width: 24px; padding: 0; }
-  .page-title { font-size: 16.5px; font-weight: 600; color: var(--navy-deep); text-align: center; }
+  .topbar-center { text-align:center; flex:1; }
+  .page-title { font-size: 16.5px; font-weight: 700; color: var(--navy-deep); }
+  .page-subtitle { font-size: 11px; color: #64748b; font-weight: 500; margin-top: 2px; }
+  .more-btn { background:none; border:none; color:var(--navy-deep); cursor:pointer; display:flex; align-items:center; justify-content:flex-end; width: 24px; padding: 0; }
   .placeholder { width: 24px; }
 
   .form-container { margin: 16px; background: #fff; border-radius: 22px; box-shadow: 0 8px 24px -8px rgba(0,0,0,0.04); padding: 24px 16px; }
@@ -81,39 +95,6 @@
 
   /* Responsive layout for Mobile & iPad */
   @media (max-width: 1024px) {
-    body {
-      padding: 0;
-      background: #fff;
-    }
-    .caption {
-      display: none;
-    }
-    .phone {
-      width: 100vw;
-      height: 100vh;
-      border: none;
-      border-radius: 0;
-      box-shadow: none;
-    }
-    .notch {
-      display: none;
-    }
-    .status {
-      display: none;
-    }
-    .topbar {
-      padding-top: 34px;
-    }
-    .scroll {
-      padding-bottom: 80px;
-    }
-    .navbar {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      z-index: 60;
-    }
     .form-label {
       flex: 0 0 85px;
       font-size: 13px;
@@ -125,23 +106,20 @@
 </style>
 </head>
 <body>
-<div class="stage">
-  <div class="caption">สหกรณ์ออมทรัพย์ครูไทย — คำนวณเงินกู้</div>
-
-  <div class="phone">
-    <div class="notch"></div>
+<div class="app-container">
     <div class="scroll">
-      <div class="status">
-        <span>9:41</span>
-        <span>●●●● 5G ▮▮▮</span>
-      </div>
       
       <div class="topbar">
         <button class="back-btn" onclick="window.location.href='services.php'">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1C1C1C" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
         </button>
-        <div class="page-title">คำนวณเงินกู้</div>
-        <div class="placeholder"></div>
+        <div class="topbar-center">
+          <div class="page-title">คำนวณเงินกู้</div>
+          <div class="page-subtitle">ข้อมูลล่าสุดเมื่อ <?= date('d M Y, H:i') ?></div>
+        </div>
+        <div class="more-btn" onclick="alert('เมนูเพิ่มเติม')">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1C1C1C" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+        </div>
       </div>
 
       <div class="form-container">
@@ -213,7 +191,6 @@
 
     </div>
     <?php include 'nav_footer.php'; ?>
-  </div>
 </div>
 <script>
   function setActiveNav(el) {
