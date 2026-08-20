@@ -29,7 +29,8 @@
     max-width: 480px;
     margin: 0 auto;
     background: #fff;
-    min-height: 100vh;
+    height: 100vh;
+    height: 100dvh;
     display: flex;
     flex-direction: column;
     position: relative;
@@ -39,7 +40,7 @@
   @media (min-width: 481px) {
     .app-container {
       margin: 20px auto;
-      min-height: calc(100vh - 40px);
+      height: calc(100vh - 40px);
       border-radius: 24px;
       border: 1px solid #E5E7EB;
     }
@@ -53,7 +54,7 @@
     padding-bottom: 12px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.03);
   }
-  .topbar { display:flex; align-items:center; justify-content:space-between; padding: 16px 20px 0; }
+  .topbar { display:flex; align-items:center; justify-content:space-between; padding: 36px 20px 0; }
   .topbar-center { text-align:center; flex:1; }
   .page-title { font-size: 18px; font-weight: 700; color: var(--navy-deep); }
   .placeholder, .back-btn { width: 40px; display:flex; align-items:center; justify-content:center; }
@@ -153,6 +154,15 @@
       bottom: 0;
       z-index: 60;
     }
+  }
+
+  @media (max-width: 400px), (max-height: 750px) {
+    .topbar { padding: 20px 16px 0; }
+    .page-title { font-size: 16px; }
+    .navbar { padding: 10px 4px; }
+    .navitem span { font-size: 9.5px; }
+    .notif-list { padding: 12px; gap: 12px; }
+    .notif-item { padding: 12px; }
   }
 </style>
 </head>

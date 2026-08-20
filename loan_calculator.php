@@ -30,7 +30,8 @@
     max-width: 480px;
     margin: 0 auto;
     background: #fff;
-    min-height: 100vh;
+    height: 100vh;
+    height: 100dvh;
     display: flex;
     flex-direction: column;
     position: relative;
@@ -40,7 +41,7 @@
   @media (min-width: 481px) {
     .app-container {
       margin: 20px auto;
-      min-height: calc(100vh - 40px);
+      height: calc(100vh - 40px);
       border-radius: 24px;
       border: 1px solid #E5E7EB;
     }
@@ -49,7 +50,7 @@
   .scroll{flex:1;overflow-y:auto;background:#F6F8FA; padding-bottom: 30px;}
   .status{display:flex;justify-content:space-between;align-items:center;padding:16px 26px 4px;font-size:13px;font-weight:600;color:var(--text);}
   
-  .topbar { display:flex; align-items:center; justify-content: space-between; padding: 42px 20px 12px; background: #ffffff; position: sticky; top:0; z-index: 10; box-shadow: 0 4px 12px rgba(0,0,0,0.03); }
+  .topbar { display:flex; align-items:center; justify-content: space-between; padding: 36px 20px 12px; background: #ffffff; position: sticky; top:0; z-index: 10; box-shadow: 0 4px 12px rgba(0,0,0,0.03); }
   .back-btn { background:none; border:none; color:var(--navy-deep); cursor:pointer; display:flex; align-items:center; width: 24px; padding: 0; }
   .topbar-center { text-align:center; flex:1; }
   .page-title { font-size: 16.5px; font-weight: 700; color: var(--navy-deep); }
@@ -102,6 +103,15 @@
     .flex-row {
       flex-direction: column;
     }
+  }
+
+  @media (max-width: 400px), (max-height: 750px) {
+    .topbar { padding: 20px 16px 12px; }
+    .page-title { font-size: 16px; }
+    .navbar { padding: 10px 4px; }
+    .navitem span { font-size: 9.5px; }
+    .calc-card { padding: 16px; margin: 12px 16px; }
+    .result-box { padding: 16px; }
   }
 </style>
 </head>

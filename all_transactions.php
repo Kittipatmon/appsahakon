@@ -48,14 +48,15 @@ foreach ($transactions as $txn) {
 
   .phone{
     width:390px;height:844px;
-    background:#fff;
+    background:#f4f5f8;
     border-radius:44px;border:10px solid #0b0f16;
     box-shadow:0 30px 60px -20px rgba(0,0,0,.6), 0 0 0 1px rgba(255,255,255,.04);
     overflow:hidden;position:relative;display:flex;flex-direction:column;
   }
   .notch{position:absolute;top:0;left:50%;transform:translateX(-50%);width:120px;height:26px;background:#0b0f16;border-radius:0 0 16px 16px;z-index:50;}
 
-  .scroll{flex:1;overflow-y:auto;background:#ffffff;padding-bottom:80px;}
+  .scroll{flex:1;overflow-y:auto;background:#f4f5f8;padding-bottom:80px;}
+  .header-sticky{background:#ffffff;}
   .status{display:flex;justify-content:space-between;align-items:center;padding:16px 26px 4px;font-size:13px;font-weight:600;color:var(--text);}
   
   .topbar { display:flex; align-items:center; justify-content:space-between; padding: 6px 20px 12px; background: transparent; }
@@ -82,7 +83,7 @@ foreach ($transactions as $txn) {
     justify-content: space-between;
     padding: 10px 16px;
     background: #ffffff;
-    border-bottom: 1px solid #F1F5F9;
+    border-bottom: 1px solid #e2e8f0;
     gap: 8px;
   }
   .arrow-btn {
@@ -395,7 +396,7 @@ foreach ($transactions as $txn) {
   @media (max-width: 1024px) {
     body {
       padding: 0;
-      background: #fff;
+      background: #f4f5f8;
     }
     .caption {
       display: none;

@@ -33,12 +33,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     max-width: 480px;
     margin: 0 auto;
     background: #fff;
-    min-height: 100vh;
+    height: 100vh;
+    height: 100dvh;
     display: flex;
     flex-direction: column;
     position: relative;
     overflow-y: auto;
     box-shadow: 0 0 20px rgba(0,0,0,0.05);
+  }
+  @media (min-width: 481px) {
+    .app-container {
+      margin: 20px auto;
+      height: calc(100vh - 40px);
+      border-radius: 24px;
+      border: 1px solid #E5E7EB;
+      overflow: hidden;
+    }
   }
   .header {
     background: linear-gradient(180deg, var(--orange-deep) 0%, #FFB37A 100%);
@@ -101,7 +111,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   }
   .keypad .key {
     background: transparent;
-    border: none;
+    border: 1px solid #CBD5E1;
     font-size: 28px;
     font-weight: 500;
     color: var(--navy-deep);
@@ -121,10 +131,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   }
   .keypad .key.empty {
     pointer-events: none;
+    border: none;
   }
   .keypad .key.delete {
     font-size: 32px;
     color: #64748B;
+    border: none;
   }
   .back-link {
     display: block;
@@ -171,6 +183,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+  }
+  @media (max-width: 400px), (max-height: 750px) {
+    .header { padding: 40px 20px 20px; }
+    .logo { width: 60px; height: 60px; margin-bottom: 12px; }
+    .logo svg { width: 30px; height: 30px; }
+    .header h1 { font-size: 20px; }
+    .pin-container { padding: 20px 20px 30px; }
+    .pin-dots { margin-bottom: 24px; gap: 12px; }
+    .pin-dots .dot { width: 14px; height: 14px; }
+    .keypad { gap: 12px 20px; max-width: 240px; }
+    .keypad .key { width: 60px; height: 60px; font-size: 24px; }
+    .keypad .key.delete { font-size: 28px; }
+    .back-link { margin-top: 24px; }
   }
 </style>
 </head>
@@ -220,7 +245,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="spinner"></div>
         <p>กำลังตรวจสอบข้อมูล...</p>
       </div>
-    </div>
 </div>
 
 <script>

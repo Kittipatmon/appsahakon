@@ -52,7 +52,8 @@ $accounts = [
     max-width: 480px;
     margin: 0 auto;
     background: var(--bg, #f3f4f6);
-    min-height: 100vh;
+    height: 100vh;
+    height: 100dvh;
     display: flex;
     flex-direction: column;
     position: relative;
@@ -62,7 +63,7 @@ $accounts = [
   @media (min-width: 481px) {
     .app-container {
       margin: 20px auto;
-      min-height: calc(100vh - 40px);
+      height: calc(100vh - 40px);
       border-radius: 24px;
       border: 1px solid #E5E7EB;
     }
@@ -74,7 +75,7 @@ $accounts = [
   }
   .status{display:flex;justify-content:space-between;align-items:center;padding:16px 26px 4px;font-size:13px;font-weight:600;color:var(--text);}
   
-  .topbar { display:flex; align-items:center; justify-content:space-between; padding: 6px 20px 12px; background: transparent; }
+  .topbar { display:flex; align-items:center; justify-content:space-between; padding: 36px 20px 12px; background: transparent; }
   .topbar-center { text-align:center; flex:1; }
   .page-title { font-size: 18px; font-weight: 700; color: var(--navy-deep); }
   .page-subtitle { font-size: 11px; color: var(--text-muted); margin-top: 4px; font-weight: 500; }
@@ -214,6 +215,91 @@ $accounts = [
   .navitem.active{color:var(--orange-deep);}
   .navitem span{font-size:10.5px;font-weight:600;}
 
+  /* Bottom Sheet */
+  .overlay {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 100;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+  .overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .bottom-sheet {
+    position: absolute;
+    bottom: -100%;
+    left: 0;
+    right: 0;
+    background: #fff;
+    border-radius: 24px 24px 0 0;
+    padding: 24px 20px 40px;
+    z-index: 101;
+    transition: bottom 0.3s ease;
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
+  }
+  .bottom-sheet.active {
+    bottom: 0;
+  }
+  .sheet-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  .sheet-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--navy-deep);
+  }
+  .sheet-close {
+    cursor: pointer;
+    background: #F3F4F6;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+  }
+  .sheet-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .sheet-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px;
+    background: #F9FAFB;
+    border-radius: 16px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .sheet-item:hover {
+    background: #F3F4F6;
+  }
+  .sheet-item .icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(245, 101, 43, 0.1);
+    color: var(--orange-deep);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .sheet-item .text {
+    font-size: 14.5px;
+    font-weight: 600;
+    color: var(--text);
+  }
+
   ::-webkit-scrollbar{width:0;}
 
   /* Responsive layout for Mobile & iPad */
@@ -252,6 +338,15 @@ $accounts = [
       z-index: 60;
     }
   }
+
+  @media (max-width: 400px), (max-height: 750px) {
+    .topbar { padding: 20px 16px 12px; }
+    .page-title { font-size: 16px; }
+    .navbar { padding: 10px 4px; }
+    .navitem span { font-size: 9.5px; }
+    .acc-card { padding: 12px 16px; margin: 12px; }
+    .bal-val { font-size: 18px; }
+  }
 </style>
 </head>
 <body>
@@ -271,7 +366,7 @@ $accounts = [
             <div class="page-title">บัญชีของฉัน</div>
             <div class="page-subtitle" id="update-time">ข้อมูลล่าสุดเมื่อ 5 ต.ค. 2569, 15:45</div>
           </div>
-          <div class="topbar-right">
+          <div class="topbar-right" style="cursor:pointer;" onclick="openSheet()">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--navy-deep)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/><circle cx="5" cy="12" r="1.5"/></svg>
           </div>
         </div>
@@ -337,9 +432,36 @@ $accounts = [
     </div>
 
     <?php include 'nav_footer.php'; ?>
+
+    <!-- Bottom Sheet -->
+    <div class="overlay" id="sheetOverlay" onclick="closeSheet()"></div>
+    <div class="bottom-sheet" id="bottomSheet">
+      <div class="sheet-header">
+        <div class="sheet-title">จัดการบัญชี</div>
+        <div class="sheet-close" onclick="closeSheet()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </div>
+      </div>
+      <div class="sheet-menu">
+        <div class="sheet-item" onclick="if(typeof go === 'function') go('เพิ่มบัญชี'); else alert('ไปหน้าเพิ่มบัญชี'); closeSheet();">
+          <div class="icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </div>
+          <div class="text">เพิ่มบัญชี</div>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
 <script>
+  function openSheet() {
+    document.getElementById('sheetOverlay').classList.add('active');
+    document.getElementById('bottomSheet').classList.add('active');
+  }
+  function closeSheet() {
+    document.getElementById('sheetOverlay').classList.remove('active');
+    document.getElementById('bottomSheet').classList.remove('active');
+  }
+
   function setActiveNav(el) {
     if(el.dataset.label) {
       // url redirect is handled by inline onclick in nav_footer.php

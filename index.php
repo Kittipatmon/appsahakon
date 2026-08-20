@@ -41,12 +41,14 @@ $promos = [
 // ---------- ปุ่มลัด 2 ช่อง ----------
 $quickActions = [
     [
-        'label' => 'ฝากเงิน<br>ด้วยตนเอง',
-        'icon'  => '<path d="M12 19V5"/><path d="M5 12l7-7 7 7"/>',
+        'label'      => 'ฝากเงิน<br>ด้วยตนเอง',
+        'image_from' => 'image/main/Krungthai-Bank-Logo-Vector.svg-.png',
+        'image_to'   => 'image/main/logo.png',
     ],
     [
-        'label' => 'ถอนเงิน<br>ผ่านตนเอง',
-        'icon'  => '<path d="M12 5v14"/><path d="M19 12l-7 7-7-7"/>',
+        'label'      => 'ถอนเงิน<br>ผ่านตนเอง',
+        'image_from' => 'image/main/logo.png',
+        'image_to'   => 'image/main/Krungthai-Bank-Logo-Vector.svg-.png',
     ],
 ];
 
@@ -118,7 +120,7 @@ $news = [
 
   .status{display:flex;justify-content:space-between;align-items:center;padding:16px 26px 4px;font-size:13px;font-weight:600;color:#fff;}
 
-  .header{padding:10px 20px 6px;}
+  .header{padding:36px 20px 6px;}
   .header-row{display:flex;align-items:center;justify-content:space-between;}
   .member{display:flex;align-items:center;gap:10px;}
   .avatar{width:42px;height:42px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;color:var(--orange-deep);font-weight:700;font-size:15px;border:2px solid rgba(255,255,255,.7);}
@@ -148,7 +150,7 @@ $news = [
   .quick a:active{background:#F2F2F2;}
   .quick a:first-child::after{content:"";position:absolute;right:0;top:14%;bottom:14%;width:1px;background:#EEE;}
   .qicon{width:36px;height:36px;border-radius:50%;background:var(--blue);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-  .qlabel{font-size:12px;font-weight:600;color:var(--text);line-height:1.3;}
+  .qlabel{font-size:12px;font-weight:600;color:var(--text);line-height:1.3;text-align:center;flex:1;}
   .qchev{margin-left:auto;color:#C7C7C7;transition:transform .15s ease;}
   .quick a:hover .qchev{transform:translateX(2px);}
 
@@ -239,15 +241,22 @@ $news = [
       z-index: 60;
     }
   }
+
+  @media (max-width: 400px), (max-height: 750px) {
+    .header { padding: 20px 16px 6px; }
+    .promo { padding: 12px; margin: 10px 14px 0; width: calc(100% - 28px); }
+    .promo-icon { width: 38px; height: 38px; }
+    .quick-actions { padding: 16px 16px 0; gap: 10px; }
+    .menu-grid { padding: 16px; gap: 12px; }
+    .ad-section { padding: 0 16px 20px; }
+    .navbar { padding: 10px 4px; }
+    .navitem span { font-size: 9.5px; }
+  }
 </style>
 </head>
 <body>
 <div class="app-container">
     <div class="scroll">
-      <div class="status">
-        <span>9:41</span>
-        <span>●●●● 5G ▮▮▮</span>
-      </div>
 
       <div class="header">
         <div class="header-row">
@@ -291,7 +300,11 @@ $news = [
       <div class="quick">
         <?php foreach ($quickActions as $qa): $qaText = strip_tags(str_replace('<br>', ' ', $qa['label'])); ?>
         <a onclick="go('<?= htmlspecialchars($qaText) ?>')">
-          <div class="qicon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><?= $qa['icon'] ?></svg></div>
+          <div style="display: flex; align-items: center; gap: 4px; flex-shrink: 0;">
+            <img src="<?= htmlspecialchars($qa['image_from']) ?>" alt="" style="width: 26px; height: 26px; object-fit: contain;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#A0AEC0" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+            <img src="<?= htmlspecialchars($qa['image_to']) ?>" alt="" style="width: 26px; height: 26px; object-fit: contain;">
+          </div>
           <div class="qlabel"><?= $qa['label'] ?></div>
           <div class="qchev">&#8250;</div>
         </a>
@@ -316,7 +329,7 @@ $news = [
 
         <div class="news-head">
           <div class="news-title">ข่าวสาร</div>
-          <div class="news-all" onclick="go('ข่าวสารทั้งหมด')">ดูทั้งหมด &#8250;</div>
+          <div class="news-all" onclick="window.location.href='news.php'">ดูทั้งหมด &#8250;</div>
         </div>
         <div class="news-card" onclick="go('<?= htmlspecialchars($news['title']) ?>')">
           <div class="news-thumb"></div>
@@ -350,7 +363,7 @@ $news = [
           </div>
           
           <div class="ad-grid-2">
-            <div class="ad-box-horiz" onclick="go('โปรโมชันพิเศษ')">
+            <div class="ad-box-horiz" onclick="window.location.href='promotions.php'">
               <div class="text">โปรโมชันพิเศษ</div>
             </div>
             <div class="ad-box-horiz" onclick="go('กิจกรรมสหกรณ์')">

@@ -57,7 +57,8 @@ $menuCategories = [
     max-width: 480px;
     margin: 0 auto;
     background: #fff;
-    min-height: 100vh;
+    height: 100vh;
+    height: 100dvh;
     display: flex;
     flex-direction: column;
     position: relative;
@@ -67,7 +68,7 @@ $menuCategories = [
 
   .status{display:flex;justify-content:space-between;align-items:center;padding:16px 26px 4px;font-size:13px;font-weight:600;color:#000;}
 
-  .topbar{display:flex;align-items:center;justify-content:space-between;padding:12px 24px 20px;}
+  .topbar{display:flex;align-items:center;justify-content:space-between;padding:60px 24px 20px;}
   .back-btn{cursor:pointer;display:flex;align-items:center;justify-content:center;}
   .topbar-title{font-size:16px;font-weight:700;color:var(--text);}
   .placeholder{width:24px;}
@@ -116,15 +117,21 @@ $menuCategories = [
       z-index: 60;
     }
   }
+
+  @media (max-width: 400px), (max-height: 750px) {
+    .topbar { padding: 40px 16px 12px; }
+    .page-title, .topbar-title { font-size: 16px; }
+    .navbar { padding: 10px 4px; }
+    .navitem span { font-size: 9.5px; }
+    .grid { gap: 10px 0; padding: 12px 8px; }
+    .tile-icon { width: 65px; height: 65px; }
+  }
 </style>
 </head>
 <body>
 <div class="app-container">
     <div class="scroll">
-      <div class="status">
-        <span>9:41</span>
-        <span>●●●● 5G ▮▮▮</span>
-      </div>
+      
 
       <div class="topbar">
         <div class="back-btn" onclick="window.location.href='index.php'">
